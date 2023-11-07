@@ -1,0 +1,9 @@
+body {
+    background-image: url('bg-light.png'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body, label, textarea {
+    color: black; 
+}

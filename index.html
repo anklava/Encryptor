@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <title>Encryptor</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/dark-theme.css" id="dark-theme">
+    <link rel="stylesheet" href="css/light-theme.css" id="light-theme" disabled>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1></h1>
+
+    <form method="post" action="javascript:void(0);">
+        <label for="key">Ключ:</label>
+        <input type="text" name="key" required><br>
+        <label for="message">Повідомлення:</label>
+        <textarea name="message" rows="5" required></textarea><br>
+        <input type="button" value="Зашифрувати" class="btn-encode" id="encode-button">
+    </form>
+
+    <form method="post" action="javascript:void(0);">
+        <label for="key">Ключ:</label>
+        <input type="text" name="key" required><br>
+        <label for="message">Повідомлення:</label>
+        <textarea name="message" rows="5" required></textarea><br>
+        <input type="button" value="Розшифрувати" class="btn-decode" id="decode-button">
+    </form>
+
+    <p id="result"></p>
+
+    <button id="translate-button" class="translate-button">
+        <img src="css/ua.svg" alt="Перевести на украинский" class="translate-icon" id="translate-icon">
+    </button>    
+
+    <button id="theme-toggle" class="theme-toggle-button">
+        <img src="css/sun.svg" alt="Сменить тему" class="theme-icon" id="theme-icon">
+    </button>
+    
+    <script src="main.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.4.0/dist/lazyload.min.js"></script>
+
+    <script>
+        document.forms[0].onsubmit = function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            fetch('/encode', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = 'Зашифроване повідомлення: ' + data.result;
+            });
+        }
+
+        document.forms[1].onsubmit = function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            fetch('/decode', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = 'Декодоване повідомлення: ' + data.result;
+            });
+        }
+
+const translateButton = document.getElementById('translate-button');
+const translateIcon = document.getElementById('translate-icon');
+const uaImage = "css/ua.svg";
+const enImage = "css/en.svg";
+
+translateButton.addEventListener('click', () => {
+    const currentLang = document.documentElement.lang;
+    if (currentLang === 'en') {
+        document.documentElement.lang = 'uk';
+        translateIcon.src = uaImage;
+        translateButton.alt = "Switch to English";  
+      
+        document.title = 'Шифрувальник';
+        document.getElementById('result').innerText = 'Зашифроване повідомлення: ';
+        document.querySelector('form:first-of-type label[for="key"]').textContent = 'Ключ:';
+        document.querySelector('form:first-of-type label[for="message"]').textContent = 'Повідомлення:';
+        document.querySelector('form:first-of-type input[type="button"]').value = 'Зашифрувати';;
+        document.querySelector('form:last-of-type label[for="key"]').textContent = 'Ключ:';
+        document.querySelector('form:last-of-type label[for="message"]').textContent = 'Повідомлення:';
+        document.querySelector('form:last-of-type input[type="submit"]').value = 'Розшифрувати';
+    } else {
+        document.documentElement.lang = 'en';
+        translateIcon.src = enImage;
+        translateButton.alt = "Переключитися на українську";  
+
+        document.title = 'Encryptor';
+        document.getElementById('result').innerText = 'Encrypted message: ';
+        document.querySelector('form:first-of-type label[for="key"]').textContent = 'Key:';
+        document.querySelector('form:first-of-type label[for="message"]').textContent = 'Message:';
+        document.querySelector('form:first-of-type input[type="button"]').value = 'Encrypt';
+        document.querySelector('form:last-of-type label[for="key"]').textContent = 'Key:';
+        document.querySelector('form:last-of-type label[for="message"]').textContent = 'Message:';
+        document.querySelector('form:last-of-type input[type="submit"]').value = 'Decrypt';
+    }
+});
+
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const darkTheme = document.getElementById('dark-theme');
+const lightTheme = document.getElementById('light-theme');
+
+
+themeToggle.addEventListener('click', () => {
+
+    if (darkTheme.disabled) {
+        darkTheme.removeAttribute('disabled');
+        lightTheme.setAttribute('disabled', 'true');
+        themeIcon.src = "css/sun.svg";
+    } else {
+
+        lightTheme.removeAttribute('disabled');
+        darkTheme.setAttribute('disabled', 'true');
+        themeIcon.src = "css/moon.svg";
+    }
+});
+    </script>
+</body>
+</html>

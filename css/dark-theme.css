@@ -1,0 +1,15 @@
+/* dark-theme.css */
+body {
+    background-image: url('bg-dark.png'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body, label, textarea {
+    color: white; 
+}
+
+
+textarea {
+    color: black; 
+}

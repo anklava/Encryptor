@@ -1,0 +1,102 @@
+body {
+    background-image: url('bg-dark.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    margin-top: 40px;
+}
+
+h1 {
+    font-family: 'Manrope', sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px;
+}
+
+button {
+    background-color: #0074d9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-encode {
+    background-color: #0074d9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px 0 rgba(11, 99, 246, 1);
+    transition: 0.5s;
+}
+
+.btn-encode:hover {
+    transform: translate(0, -3px);
+    box-shadow: 0 20px 40px 0 rgba(11, 99, 246, 1);
+}
+
+.btn-decode {
+    background-color: #0074d9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px 0 rgba(11, 99, 246, 1);
+    transition: 0.5s;
+}
+
+.btn-decode:hover {
+    transform: translate(0, -3px);
+    box-shadow: 0 20px 40px 0 rgba(11, 99, 246, 1);
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.theme-toggle-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+    background: none !important;
+    border: none;
+    cursor: pointer;
+}
+
+.theme-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s;
+}
+
+.theme-toggle-button:hover .theme-icon {
+    transform: scale(1.2);
+    filter: brightness(2);
+}
+
+.translate-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background: none !important;
+    z-index: 9999;
+}
+
+.translate-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s;
+}
+
+.translate-button:hover .translate-icon {
+    transform: scale(1.2);
+}
